@@ -1,0 +1,17 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: currency-exchange
+  config:
+    import: optional:configserver:localhost:8888
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/currency
+    username: root
+    password: PasswordChanged@7
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
