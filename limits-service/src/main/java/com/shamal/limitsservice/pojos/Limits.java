@@ -1,4 +1,4 @@
-package com.shamal.limitsservice.pojo;
+package com.shamal.limitsservice.pojos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
