@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  # Naming server Service
+  naming-service:
+    image: 9183ea3d509e
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - currency-network
+
+  # Api Gateway Service
+  api-gateway:
+    image: 6938b7197493
+    mem_limit: 700m
+    ports:
+      - "8765:8765"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-service
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-service:8761/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin-server:9411
+
+  # Currency-Exchange Service
+  currency-exchange:
+    image: 0309f74c4ce3
+    mem_limit: 700m
+    ports:
+      - "8001:8001"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-service
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-service:8761/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin-server:9411
+
+  # Currency-Conversion Service
+  currency-conversion:
+    image: 6475d9385b3a
+    mem_limit: 700m
+    ports:
+      - "8100:8100"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-service
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-service:8761/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin-server:9411
+
+# Zipkin
+  zipkin-server:
+    image: openzipkin/zipkin:2.23
+    mem_limit: 300m
+    ports:
+      - "9411:9411"
+    networks:
+      - currency-network
+    restart: always
+
+networks:
+  currency-network:

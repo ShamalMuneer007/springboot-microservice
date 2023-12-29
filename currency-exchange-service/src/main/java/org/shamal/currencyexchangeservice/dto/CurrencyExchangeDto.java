@@ -16,8 +16,8 @@ public class CurrencyExchangeDto {
 
     public CurrencyExchangeDto(CurrencyExchange currencyExchangeInfo, String environmentProperty) {
         this.id =currencyExchangeInfo.getId();
-        this.from = currencyExchangeInfo.getSourceCurrency();
-        this.to = currencyExchangeInfo.getTargetCurrency();
+        this.from = currencyExchangeInfo.getCurrencyFrom();
+        this.to = currencyExchangeInfo.getCurrencyTo();
         this.conversionMultiple = currencyExchangeInfo.getConversionMultiple();
         this.environment = environmentProperty;
     }

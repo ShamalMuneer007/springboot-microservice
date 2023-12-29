@@ -43,6 +43,7 @@ public class CurrencyExchangeController {
             return new ResponseEntity<>("No such data",HttpStatus.BAD_REQUEST);
         }
     }
+
     @PostMapping("/add-currency-exchange-info")
     public ResponseEntity<String> addCurrencyData(@RequestBody CurrencyExchangeDto currencyExchangeDto){
         try {
@@ -66,6 +67,7 @@ public class CurrencyExchangeController {
         return forEntity.getBody();
     }
     public String failTestFallback(Exception e){
+        log.info("In failTestFallback");
         return "I'm just fell off. I'm good";
     }
 }

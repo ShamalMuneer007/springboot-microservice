@@ -16,14 +16,14 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
     @Override
     public void createRecord(CurrencyExchangeDto currencyExchangeDto) {
         CurrencyExchange currencyExchange = new CurrencyExchange();
-        currencyExchange.setTargetCurrency(currencyExchangeDto.getTo());
-        currencyExchange.setSourceCurrency(currencyExchangeDto.getFrom());
+        currencyExchange.setCurrencyTo(currencyExchangeDto.getTo());
+        currencyExchange.setCurrencyFrom(currencyExchangeDto.getFrom());
         currencyExchange.setConversionMultiple(currencyExchangeDto.getConversionMultiple());
         currencyExchangeRepository.save(currencyExchange);
     }
 
     @Override
     public CurrencyExchange findRecordByToAndFrom(String to, String from) {
-       return currencyExchangeRepository.findByTargetCurrencyAndSourceCurrency(to,from);
+       return currencyExchangeRepository.findByCurrencyToAndCurrencyFrom(to,from);
     }
 }

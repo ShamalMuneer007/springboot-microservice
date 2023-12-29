@@ -18,8 +18,8 @@ public class CurrencyExchange {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String sourceCurrency;
-    private String targetCurrency;
+    private String currencyFrom;
+    private String currencyTo;
     private Double conversionMultiple;
     private String environment;
 
